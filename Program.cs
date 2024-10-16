@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Npgsql;
 using DBase.Data;
 
+
 internal class Program
 {
     private static void Main(string[] args)
