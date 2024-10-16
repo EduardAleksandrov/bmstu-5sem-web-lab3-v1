@@ -3,6 +3,7 @@ using System;
 using DBase.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241016134819_databasein")]
+    partial class databasein
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,26 +60,6 @@ namespace API.Migrations
                     b.HasKey("ID_Customer");
 
                     b.ToTable("Customers");
-
-                    b.HasData(
-                        new
-                        {
-                            ID_Customer = new Guid("a688eb2e-3449-40a0-8368-70f2f10df9a5"),
-                            Address = "123 Main St, Anytown, USA",
-                            Auto = 0,
-                            CustomerName = "John Doe",
-                            Email = "john.doe@example.com",
-                            Phone = "111-222-3333"
-                        },
-                        new
-                        {
-                            ID_Customer = new Guid("4876cb7e-bd37-4b2c-95cf-f102aaa028fa"),
-                            Address = "456 Elm St, Othertown, USA",
-                            Auto = 0,
-                            CustomerName = "Jane Smith",
-                            Email = "jane.smith@example.com",
-                            Phone = "444-555-6666"
-                        });
                 });
 
             modelBuilder.Entity("DBase.Models.Order", b =>
@@ -110,26 +93,6 @@ namespace API.Migrations
                     b.HasIndex("CustomerID");
 
                     b.ToTable("Orders");
-
-                    b.HasData(
-                        new
-                        {
-                            ID_Order = new Guid("f02d6dbf-1b4f-4038-bbe0-cef6de394c80"),
-                            Auto = 0,
-                            CustomerID = new Guid("a688eb2e-3449-40a0-8368-70f2f10df9a5"),
-                            OrderDate = new DateTime(2024, 10, 16, 14, 10, 40, 465, DateTimeKind.Utc).AddTicks(7932),
-                            Status = "Completed",
-                            TotalAmount = 25.00m
-                        },
-                        new
-                        {
-                            ID_Order = new Guid("3238d9ce-c058-46ba-8f0b-a6e718531990"),
-                            Auto = 0,
-                            CustomerID = new Guid("4876cb7e-bd37-4b2c-95cf-f102aaa028fa"),
-                            OrderDate = new DateTime(2024, 10, 16, 14, 10, 40, 465, DateTimeKind.Utc).AddTicks(7937),
-                            Status = "Pending",
-                            TotalAmount = 30.00m
-                        });
                 });
 
             modelBuilder.Entity("DBase.Models.OrderDetail", b =>
@@ -163,35 +126,6 @@ namespace API.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("OrderDetails");
-
-                    b.HasData(
-                        new
-                        {
-                            ID_OrderDetails = new Guid("725bf57a-3563-4234-947a-b0ff8a4f4e81"),
-                            Auto = 0,
-                            OrderId = new Guid("f02d6dbf-1b4f-4038-bbe0-cef6de394c80"),
-                            ProductId = new Guid("988d4109-9f96-4adf-a745-15e3d72d9073"),
-                            Quantity = 2,
-                            UnitPrice = 10.00m
-                        },
-                        new
-                        {
-                            ID_OrderDetails = new Guid("6ff466a0-9679-440c-a5cd-89b3ae1b01fa"),
-                            Auto = 0,
-                            OrderId = new Guid("f02d6dbf-1b4f-4038-bbe0-cef6de394c80"),
-                            ProductId = new Guid("1fc5ee95-0a2b-41c7-91bc-a7856ba767aa"),
-                            Quantity = 1,
-                            UnitPrice = 15.00m
-                        },
-                        new
-                        {
-                            ID_OrderDetails = new Guid("50eab1ca-0657-486c-90c3-06dfacef2dd3"),
-                            Auto = 0,
-                            OrderId = new Guid("3238d9ce-c058-46ba-8f0b-a6e718531990"),
-                            ProductId = new Guid("05d193a3-94e6-4738-892b-1d9a0f8f854c"),
-                            Quantity = 1,
-                            UnitPrice = 20.00m
-                        });
                 });
 
             modelBuilder.Entity("DBase.Models.Product", b =>
@@ -230,38 +164,6 @@ namespace API.Migrations
                     b.HasIndex("WarehouseID");
 
                     b.ToTable("Products");
-
-                    b.HasData(
-                        new
-                        {
-                            ID_Product = new Guid("988d4109-9f96-4adf-a745-15e3d72d9073"),
-                            Auto = 0,
-                            ProductName = "Product 1",
-                            QuantityInStock = 100,
-                            SupplierID = new Guid("919d9944-1777-4d02-96e2-1ef32c5a5785"),
-                            UnitPrice = 10.00m,
-                            WarehouseID = new Guid("f9ec72c5-21d5-4293-b15d-877129b54286")
-                        },
-                        new
-                        {
-                            ID_Product = new Guid("1fc5ee95-0a2b-41c7-91bc-a7856ba767aa"),
-                            Auto = 0,
-                            ProductName = "Product 2",
-                            QuantityInStock = 200,
-                            SupplierID = new Guid("919d9944-1777-4d02-96e2-1ef32c5a5785"),
-                            UnitPrice = 15.00m,
-                            WarehouseID = new Guid("f9ec72c5-21d5-4293-b15d-877129b54286")
-                        },
-                        new
-                        {
-                            ID_Product = new Guid("05d193a3-94e6-4738-892b-1d9a0f8f854c"),
-                            Auto = 0,
-                            ProductName = "Product 3",
-                            QuantityInStock = 150,
-                            SupplierID = new Guid("473a6263-2cdc-455d-a208-1c24e70bf05a"),
-                            UnitPrice = 20.00m,
-                            WarehouseID = new Guid("ed4512c6-1b27-4405-803b-3f1757b072ff")
-                        });
                 });
 
             modelBuilder.Entity("DBase.Models.Supplier", b =>
@@ -297,26 +199,6 @@ namespace API.Migrations
                     b.HasKey("ID_Supplier");
 
                     b.ToTable("Suppliers");
-
-                    b.HasData(
-                        new
-                        {
-                            ID_Supplier = new Guid("919d9944-1777-4d02-96e2-1ef32c5a5785"),
-                            Auto = 0,
-                            ContactName = "Alice",
-                            Email = "alice@supplier.com",
-                            Phone = "123-456-7890",
-                            SupplierName = "Supplier A"
-                        },
-                        new
-                        {
-                            ID_Supplier = new Guid("473a6263-2cdc-455d-a208-1c24e70bf05a"),
-                            Auto = 0,
-                            ContactName = "Bob",
-                            Email = "bob@supplier.com",
-                            Phone = "098-765-4321",
-                            SupplierName = "Supplier B"
-                        });
                 });
 
             modelBuilder.Entity("DBase.Models.Warehouse", b =>
@@ -352,26 +234,6 @@ namespace API.Migrations
                     b.HasKey("ID_Warehouse");
 
                     b.ToTable("Warehouses");
-
-                    b.HasData(
-                        new
-                        {
-                            ID_Warehouse = new Guid("f9ec72c5-21d5-4293-b15d-877129b54286"),
-                            Auto = 0,
-                            Capacity = 1000,
-                            Location = "Location A",
-                            ManagerName = "Manager A",
-                            WarehouseName = "Warehouse 1"
-                        },
-                        new
-                        {
-                            ID_Warehouse = new Guid("ed4512c6-1b27-4405-803b-3f1757b072ff"),
-                            Auto = 0,
-                            Capacity = 2000,
-                            Location = "Location B",
-                            ManagerName = "Manager B",
-                            WarehouseName = "Warehouse 2"
-                        });
                 });
 
             modelBuilder.Entity("DBase.Models.Order", b =>
