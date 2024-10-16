@@ -1,3 +1,7 @@
+using Microsoft.EntityFrameworkCore;
+using Npgsql;
+using DBase.Data;
+
 internal class Program
 {
     private static void Main(string[] args)
@@ -11,6 +15,15 @@ internal class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
+        // Entity Framework
+        string? connection = builder.Configuration.GetConnectionString("DefaultConnection");
+        builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(connection));
+        // ---
+
+        // CORS
+        builder.Services.AddCors();
+        // ---
+
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
@@ -18,6 +31,8 @@ internal class Program
         {
             app.UseSwagger();
             app.UseSwaggerUI();
+            app.UseCors(builder => builder.AllowAnyOrigin());
+
         }
 
         app.UseHttpsRedirection();
