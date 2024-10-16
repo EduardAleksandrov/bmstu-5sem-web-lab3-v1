@@ -36,6 +36,7 @@ public class ProductsController : ControllerBase
         })
         .ToArray();
     }
+    
     [HttpGet("products", Name = "GetProducts")]
     public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
     {
