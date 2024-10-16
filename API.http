@@ -25,6 +25,11 @@ Content-Type: application/json
     ]
 }
 ###
-Get {{API_HostAddress}}/api/Products/2
+Get {{API_HostAddress}}/api/Products/1fec7ae0-1ead-4664-8964-d7b95376e528
+Accept: application/json
+Content-Type: application/json
+
+###
+Get {{API_HostAddress}}/api/Products
 Accept: application/json
 Content-Type: application/json

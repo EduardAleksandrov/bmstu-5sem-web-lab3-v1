@@ -103,10 +103,10 @@ public class ProductsController : ControllerBase
 
     // GET: api/orders/{id}
     [HttpGet("{id}")]
-    public async Task<ActionResult<Order>> GetOrder(int id)
+    public async Task<ActionResult<Order>> GetOrder(Guid id)
     {
         var order = await _context.Orders
-            .FirstOrDefaultAsync(o => o.Auto == id);
+            .FirstOrDefaultAsync(o => o.ID_Order == id);
 
         if (order == null)
         {
@@ -115,4 +115,19 @@ public class ProductsController : ControllerBase
 
         return order;
     }
+    // GET: api/orders/
+    [HttpGet]
+    public async Task<ActionResult<Order>> GetOrders()
+    {
+        var order = await _context.Orders.ToListAsync();
+
+        if (order == null || !order.Any())
+        {
+            return NotFound();
+        }
+
+        return Ok(order);
+    }
+
+
 }
