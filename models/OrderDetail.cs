@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace DBase.Models
 {
@@ -18,7 +19,8 @@ namespace DBase.Models
         public decimal UnitPrice { get; set; }
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Auto { get; set; }
-
+        
+        [JsonIgnore]
         public virtual Order? Order { get; set; } // Navigation property
         public virtual Product? Product { get; set; } // Navigation property
     }

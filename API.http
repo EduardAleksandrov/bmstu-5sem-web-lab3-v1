@@ -4,3 +4,27 @@ GET {{API_HostAddress}}/api/weatherforecast/id
 Accept: application/json
 
 ###
+POST {{API_HostAddress}}/api/Products
+Accept: application/json
+Content-Type: application/json
+
+{
+    "CustomerID": "4876cb7e-bd37-4b2c-95cf-f102aaa028fa",
+    "Status": "pending",
+    "OrderDetails": [
+        {
+            "ProductId": "05d193a3-94e6-4738-892b-1d9a0f8f854c",
+            "Quantity": 2,
+            "UnitPrice": 10.00
+        },
+        {
+            "ProductId": "05d193a3-94e6-4738-892b-1d9a0f8f854c",
+            "Quantity": 1,
+            "UnitPrice": 15.00
+        }
+    ]
+}
+###
+Get {{API_HostAddress}}/api/Products/2
+Accept: application/json
+Content-Type: application/json
