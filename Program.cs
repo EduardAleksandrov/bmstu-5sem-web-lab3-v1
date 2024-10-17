@@ -21,7 +21,13 @@ internal class Program
         // ---
 
         // CORS
-        builder.Services.AddCors();
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("AllowAllOrigins",
+                builder => builder.AllowAnyOrigin()
+                                .AllowAnyMethod()
+                                .AllowAnyHeader());
+        });
         // ---
 
         var app = builder.Build();
@@ -31,7 +37,8 @@ internal class Program
         {
             app.UseSwagger();
             app.UseSwaggerUI();
-            app.UseCors(builder => builder.AllowAnyOrigin());
+            // CORS
+            app.UseCors("AllowAllOrigins");
 
         }
 

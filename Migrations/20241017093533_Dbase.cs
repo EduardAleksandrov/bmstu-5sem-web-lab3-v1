@@ -4,10 +4,12 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace API.Migrations
 {
     /// <inheritdoc />
-    public partial class databasein : Migration
+    public partial class Dbase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -71,7 +73,7 @@ namespace API.Migrations
                     CustomerID = table.Column<Guid>(type: "uuid", nullable: false),
                     TotalAmount = table.Column<decimal>(type: "numeric", nullable: false),
                     OrderDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    Status = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    Status = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
                     Auto = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
                 },
@@ -143,6 +145,62 @@ namespace API.Migrations
                         principalTable: "Products",
                         principalColumn: "ID_Product",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Customers",
+                columns: new[] { "ID_Customer", "Address", "CustomerName", "Email", "Phone" },
+                values: new object[,]
+                {
+                    { new Guid("3d6dc92a-6a71-48d0-a09e-811f1a7133de"), "456 Elm St, Othertown, USA", "Jane Smith", "jane.smith@example.com", "444-555-6666" },
+                    { new Guid("573eb718-2845-46a3-94b8-b09de8a1d624"), "123 Main St, Anytown, USA", "John Doe", "john.doe@example.com", "111-222-3333" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Suppliers",
+                columns: new[] { "ID_Supplier", "ContactName", "Email", "Phone", "SupplierName" },
+                values: new object[,]
+                {
+                    { new Guid("364f879f-7d1b-4612-badd-fc7829a6dfd3"), "Bob", "bob@supplier.com", "098-765-4321", "Supplier B" },
+                    { new Guid("90b9f4db-9194-4129-bd2a-53e16a4eaa16"), "Alice", "alice@supplier.com", "123-456-7890", "Supplier A" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Warehouses",
+                columns: new[] { "ID_Warehouse", "Capacity", "Location", "ManagerName", "WarehouseName" },
+                values: new object[,]
+                {
+                    { new Guid("ca897d41-a45f-43fc-bd4a-6398f2e63b5f"), 1000, "Location A", "Manager A", "Warehouse 1" },
+                    { new Guid("ced05974-656b-4f78-946c-0ffaa0bf8140"), 2000, "Location B", "Manager B", "Warehouse 2" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Orders",
+                columns: new[] { "ID_Order", "CustomerID", "OrderDate", "Status", "TotalAmount" },
+                values: new object[,]
+                {
+                    { new Guid("37e33bbb-96e4-435a-835a-3e076754907d"), new Guid("3d6dc92a-6a71-48d0-a09e-811f1a7133de"), new DateTime(2024, 10, 17, 9, 35, 32, 782, DateTimeKind.Utc).AddTicks(5522), "Pending", 30.00m },
+                    { new Guid("72a56ca7-7292-4901-b8b2-8b8d859a5184"), new Guid("573eb718-2845-46a3-94b8-b09de8a1d624"), new DateTime(2024, 10, 17, 9, 35, 32, 782, DateTimeKind.Utc).AddTicks(5514), "Completed", 25.00m }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Products",
+                columns: new[] { "ID_Product", "ProductName", "QuantityInStock", "SupplierID", "UnitPrice", "WarehouseID" },
+                values: new object[,]
+                {
+                    { new Guid("01444e9a-ba89-46c1-9ba4-37cc7413695c"), "Product 2", 200, new Guid("90b9f4db-9194-4129-bd2a-53e16a4eaa16"), 15.00m, new Guid("ca897d41-a45f-43fc-bd4a-6398f2e63b5f") },
+                    { new Guid("122b3317-2815-41bb-bfd3-afcb75fb8a20"), "Product 1", 100, new Guid("90b9f4db-9194-4129-bd2a-53e16a4eaa16"), 10.00m, new Guid("ca897d41-a45f-43fc-bd4a-6398f2e63b5f") },
+                    { new Guid("d9b2a1e8-df8c-40ea-891b-756652ec7cb8"), "Product 3", 150, new Guid("364f879f-7d1b-4612-badd-fc7829a6dfd3"), 20.00m, new Guid("ced05974-656b-4f78-946c-0ffaa0bf8140") }
+                });
+
+            migrationBuilder.InsertData(
+                table: "OrderDetails",
+                columns: new[] { "ID_OrderDetails", "OrderId", "ProductId", "Quantity", "UnitPrice" },
+                values: new object[,]
+                {
+                    { new Guid("284f95d7-fc50-44fd-9651-dde0a3fc1e0b"), new Guid("72a56ca7-7292-4901-b8b2-8b8d859a5184"), new Guid("01444e9a-ba89-46c1-9ba4-37cc7413695c"), 1, 15.00m },
+                    { new Guid("ad232511-ff0b-4464-a30a-b1a0afe23a95"), new Guid("37e33bbb-96e4-435a-835a-3e076754907d"), new Guid("d9b2a1e8-df8c-40ea-891b-756652ec7cb8"), 1, 20.00m },
+                    { new Guid("c76de488-7673-4dac-b83f-2e00f2225bc4"), new Guid("72a56ca7-7292-4901-b8b2-8b8d859a5184"), new Guid("122b3317-2815-41bb-bfd3-afcb75fb8a20"), 2, 10.00m }
                 });
 
             migrationBuilder.CreateIndex(

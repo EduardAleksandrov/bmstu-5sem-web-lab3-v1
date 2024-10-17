@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241016141040_databaseseeds")]
-    partial class databaseseeds
+    [Migration("20241017093533_Dbase")]
+    partial class Dbase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -64,7 +64,7 @@ namespace API.Migrations
                     b.HasData(
                         new
                         {
-                            ID_Customer = new Guid("a688eb2e-3449-40a0-8368-70f2f10df9a5"),
+                            ID_Customer = new Guid("573eb718-2845-46a3-94b8-b09de8a1d624"),
                             Address = "123 Main St, Anytown, USA",
                             Auto = 0,
                             CustomerName = "John Doe",
@@ -73,7 +73,7 @@ namespace API.Migrations
                         },
                         new
                         {
-                            ID_Customer = new Guid("4876cb7e-bd37-4b2c-95cf-f102aaa028fa"),
+                            ID_Customer = new Guid("3d6dc92a-6a71-48d0-a09e-811f1a7133de"),
                             Address = "456 Elm St, Othertown, USA",
                             Auto = 0,
                             CustomerName = "Jane Smith",
@@ -101,7 +101,6 @@ namespace API.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Status")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
 
@@ -117,19 +116,19 @@ namespace API.Migrations
                     b.HasData(
                         new
                         {
-                            ID_Order = new Guid("f02d6dbf-1b4f-4038-bbe0-cef6de394c80"),
+                            ID_Order = new Guid("72a56ca7-7292-4901-b8b2-8b8d859a5184"),
                             Auto = 0,
-                            CustomerID = new Guid("a688eb2e-3449-40a0-8368-70f2f10df9a5"),
-                            OrderDate = new DateTime(2024, 10, 16, 14, 10, 40, 465, DateTimeKind.Utc).AddTicks(7932),
+                            CustomerID = new Guid("573eb718-2845-46a3-94b8-b09de8a1d624"),
+                            OrderDate = new DateTime(2024, 10, 17, 9, 35, 32, 782, DateTimeKind.Utc).AddTicks(5514),
                             Status = "Completed",
                             TotalAmount = 25.00m
                         },
                         new
                         {
-                            ID_Order = new Guid("3238d9ce-c058-46ba-8f0b-a6e718531990"),
+                            ID_Order = new Guid("37e33bbb-96e4-435a-835a-3e076754907d"),
                             Auto = 0,
-                            CustomerID = new Guid("4876cb7e-bd37-4b2c-95cf-f102aaa028fa"),
-                            OrderDate = new DateTime(2024, 10, 16, 14, 10, 40, 465, DateTimeKind.Utc).AddTicks(7937),
+                            CustomerID = new Guid("3d6dc92a-6a71-48d0-a09e-811f1a7133de"),
+                            OrderDate = new DateTime(2024, 10, 17, 9, 35, 32, 782, DateTimeKind.Utc).AddTicks(5522),
                             Status = "Pending",
                             TotalAmount = 30.00m
                         });
@@ -170,28 +169,28 @@ namespace API.Migrations
                     b.HasData(
                         new
                         {
-                            ID_OrderDetails = new Guid("725bf57a-3563-4234-947a-b0ff8a4f4e81"),
+                            ID_OrderDetails = new Guid("c76de488-7673-4dac-b83f-2e00f2225bc4"),
                             Auto = 0,
-                            OrderId = new Guid("f02d6dbf-1b4f-4038-bbe0-cef6de394c80"),
-                            ProductId = new Guid("988d4109-9f96-4adf-a745-15e3d72d9073"),
+                            OrderId = new Guid("72a56ca7-7292-4901-b8b2-8b8d859a5184"),
+                            ProductId = new Guid("122b3317-2815-41bb-bfd3-afcb75fb8a20"),
                             Quantity = 2,
                             UnitPrice = 10.00m
                         },
                         new
                         {
-                            ID_OrderDetails = new Guid("6ff466a0-9679-440c-a5cd-89b3ae1b01fa"),
+                            ID_OrderDetails = new Guid("284f95d7-fc50-44fd-9651-dde0a3fc1e0b"),
                             Auto = 0,
-                            OrderId = new Guid("f02d6dbf-1b4f-4038-bbe0-cef6de394c80"),
-                            ProductId = new Guid("1fc5ee95-0a2b-41c7-91bc-a7856ba767aa"),
+                            OrderId = new Guid("72a56ca7-7292-4901-b8b2-8b8d859a5184"),
+                            ProductId = new Guid("01444e9a-ba89-46c1-9ba4-37cc7413695c"),
                             Quantity = 1,
                             UnitPrice = 15.00m
                         },
                         new
                         {
-                            ID_OrderDetails = new Guid("50eab1ca-0657-486c-90c3-06dfacef2dd3"),
+                            ID_OrderDetails = new Guid("ad232511-ff0b-4464-a30a-b1a0afe23a95"),
                             Auto = 0,
-                            OrderId = new Guid("3238d9ce-c058-46ba-8f0b-a6e718531990"),
-                            ProductId = new Guid("05d193a3-94e6-4738-892b-1d9a0f8f854c"),
+                            OrderId = new Guid("37e33bbb-96e4-435a-835a-3e076754907d"),
+                            ProductId = new Guid("d9b2a1e8-df8c-40ea-891b-756652ec7cb8"),
                             Quantity = 1,
                             UnitPrice = 20.00m
                         });
@@ -237,33 +236,33 @@ namespace API.Migrations
                     b.HasData(
                         new
                         {
-                            ID_Product = new Guid("988d4109-9f96-4adf-a745-15e3d72d9073"),
+                            ID_Product = new Guid("122b3317-2815-41bb-bfd3-afcb75fb8a20"),
                             Auto = 0,
                             ProductName = "Product 1",
                             QuantityInStock = 100,
-                            SupplierID = new Guid("919d9944-1777-4d02-96e2-1ef32c5a5785"),
+                            SupplierID = new Guid("90b9f4db-9194-4129-bd2a-53e16a4eaa16"),
                             UnitPrice = 10.00m,
-                            WarehouseID = new Guid("f9ec72c5-21d5-4293-b15d-877129b54286")
+                            WarehouseID = new Guid("ca897d41-a45f-43fc-bd4a-6398f2e63b5f")
                         },
                         new
                         {
-                            ID_Product = new Guid("1fc5ee95-0a2b-41c7-91bc-a7856ba767aa"),
+                            ID_Product = new Guid("01444e9a-ba89-46c1-9ba4-37cc7413695c"),
                             Auto = 0,
                             ProductName = "Product 2",
                             QuantityInStock = 200,
-                            SupplierID = new Guid("919d9944-1777-4d02-96e2-1ef32c5a5785"),
+                            SupplierID = new Guid("90b9f4db-9194-4129-bd2a-53e16a4eaa16"),
                             UnitPrice = 15.00m,
-                            WarehouseID = new Guid("f9ec72c5-21d5-4293-b15d-877129b54286")
+                            WarehouseID = new Guid("ca897d41-a45f-43fc-bd4a-6398f2e63b5f")
                         },
                         new
                         {
-                            ID_Product = new Guid("05d193a3-94e6-4738-892b-1d9a0f8f854c"),
+                            ID_Product = new Guid("d9b2a1e8-df8c-40ea-891b-756652ec7cb8"),
                             Auto = 0,
                             ProductName = "Product 3",
                             QuantityInStock = 150,
-                            SupplierID = new Guid("473a6263-2cdc-455d-a208-1c24e70bf05a"),
+                            SupplierID = new Guid("364f879f-7d1b-4612-badd-fc7829a6dfd3"),
                             UnitPrice = 20.00m,
-                            WarehouseID = new Guid("ed4512c6-1b27-4405-803b-3f1757b072ff")
+                            WarehouseID = new Guid("ced05974-656b-4f78-946c-0ffaa0bf8140")
                         });
                 });
 
@@ -304,7 +303,7 @@ namespace API.Migrations
                     b.HasData(
                         new
                         {
-                            ID_Supplier = new Guid("919d9944-1777-4d02-96e2-1ef32c5a5785"),
+                            ID_Supplier = new Guid("90b9f4db-9194-4129-bd2a-53e16a4eaa16"),
                             Auto = 0,
                             ContactName = "Alice",
                             Email = "alice@supplier.com",
@@ -313,7 +312,7 @@ namespace API.Migrations
                         },
                         new
                         {
-                            ID_Supplier = new Guid("473a6263-2cdc-455d-a208-1c24e70bf05a"),
+                            ID_Supplier = new Guid("364f879f-7d1b-4612-badd-fc7829a6dfd3"),
                             Auto = 0,
                             ContactName = "Bob",
                             Email = "bob@supplier.com",
@@ -359,7 +358,7 @@ namespace API.Migrations
                     b.HasData(
                         new
                         {
-                            ID_Warehouse = new Guid("f9ec72c5-21d5-4293-b15d-877129b54286"),
+                            ID_Warehouse = new Guid("ca897d41-a45f-43fc-bd4a-6398f2e63b5f"),
                             Auto = 0,
                             Capacity = 1000,
                             Location = "Location A",
@@ -368,7 +367,7 @@ namespace API.Migrations
                         },
                         new
                         {
-                            ID_Warehouse = new Guid("ed4512c6-1b27-4405-803b-3f1757b072ff"),
+                            ID_Warehouse = new Guid("ced05974-656b-4f78-946c-0ffaa0bf8140"),
                             Auto = 0,
                             Capacity = 2000,
                             Location = "Location B",
