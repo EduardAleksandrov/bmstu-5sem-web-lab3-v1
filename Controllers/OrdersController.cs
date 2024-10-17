@@ -123,6 +123,7 @@ public class OrdersController : ControllerBase
     public async Task<ActionResult<Order>> GetOrder(Guid id)
     {
         var order = await _context.Orders
+            .Include(o => o.OrderDetails)
             .FirstOrDefaultAsync(o => o.ID_Order == id);
 
         if (order == null)
@@ -136,12 +137,22 @@ public class OrdersController : ControllerBase
     [HttpGet(Name = "GetOrders")]
     public async Task<ActionResult<Order>> GetOrders()
     {
-        var order = await _context.Orders.ToListAsync();
+        // var order = await _context.Orders.ToListAsync();
+        var order = await _context.Orders
+            .Include(o => o.OrderDetails) // Eagerly load OrderDetails
+            .ToListAsync();
 
         if (order == null || !order.Any())
         {
             return NotFound();
         }
+
+        // foreach (var ord in order)
+        // {
+        //     var id = _context.OrderDetails.Where(o => o.OrderId == ord.ID_Order);
+
+        //     ord.OrderDetails?.AddRange(id);
+        // }
 
         return Ok(order);
     }
@@ -193,7 +204,7 @@ public class OrdersController : ControllerBase
     }
 
     // DELETE: api/orders/{id}
-    [HttpDelete("{id}")]
+    [HttpDelete("{id}", Name = "DeleteOrder")]
     public async Task<IActionResult> DeleteOrder(Guid id)
     {
         var order = await _context.Orders.FindAsync(id);
