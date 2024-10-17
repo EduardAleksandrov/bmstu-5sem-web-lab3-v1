@@ -193,7 +193,7 @@ public class OrdersController : ControllerBase
     }
 
     // DELETE: api/orders/{id}
-    [HttpDelete("{id}")]
+    [HttpDelete("{id}", Name = "DeleteOrder")]
     public async Task<IActionResult> DeleteOrder(Guid id)
     {
         var order = await _context.Orders.FindAsync(id);
