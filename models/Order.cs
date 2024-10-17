@@ -14,7 +14,6 @@ namespace DBase.Models
         public Guid CustomerID { get; set; }
         public decimal TotalAmount { get; set; }
         public DateTime OrderDate { get; set; }
-        [Required]
         [MaxLength(100)]
         public string? Status { get; set; }
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

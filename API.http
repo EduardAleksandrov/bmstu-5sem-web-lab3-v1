@@ -1,16 +1,12 @@
 @API_HostAddress = http://localhost:5132
 
-GET {{API_HostAddress}}/api/weatherforecast/id
-Accept: application/json
-
-###
-POST {{API_HostAddress}}/api/Products
+### Add Order and OrderDetails
+POST {{API_HostAddress}}/api/Orders HTTP/1.1
 Accept: application/json
 Content-Type: application/json
 
 {
     "CustomerID": "4876cb7e-bd37-4b2c-95cf-f102aaa028fa",
-    "Status": "pending",
     "OrderDetails": [
         {
             "ProductId": "05d193a3-94e6-4738-892b-1d9a0f8f854c",
@@ -24,12 +20,30 @@ Content-Type: application/json
         }
     ]
 }
-###
-Get {{API_HostAddress}}/api/Products/1fec7ae0-1ead-4664-8964-d7b95376e528
+### Get Order
+Get {{API_HostAddress}}/api/Orders/1fec7ae0-1ead-4664-8964-d7b95376e528 HTTP/1.1
 Accept: application/json
 Content-Type: application/json
 
-###
-Get {{API_HostAddress}}/api/Products
+### Get Orders
+Get {{API_HostAddress}}/api/Orders HTTP/1.1
 Accept: application/json
 Content-Type: application/json
+
+### Update an Order
+PUT {{API_HostAddress}}/api/Orders/3238d9ce-c058-46ba-8f0b-a6e718531990 HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+{
+    "ID_Order": "3238d9ce-c058-46ba-8f0b-a6e718531990",
+    "CustomerID": "4876cb7e-bd37-4b2c-95cf-f102aaa028fa",
+    "TotalAmount": 100.00,
+    "Status": "Shipped"
+}
+
+### Delete an Order
+DELETE {{API_HostAddress}}/api/orders/00959b56-1b6c-4224-b463-2bb8283f25ce HTTP/1.1
+
+### Options for Orders
+OPTIONS {{API_HostAddress}}/api/orders HTTP/1.1
