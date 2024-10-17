@@ -52,6 +52,23 @@ public class OrdersController : ControllerBase
             return BadRequest("Order details cannot be null or empty.");
         }
 
+        // Check if the CustomerID exists
+        var customerExists = await _context.Customers.AnyAsync(c => c.ID_Customer == orderCreateDto.CustomerID);
+        if (!customerExists)
+        {
+            return NotFound("Customer not found.");
+        }
+
+        // Check if all ProductIds exist
+        foreach (var detail in orderCreateDto.OrderDetails)
+        {
+            var productExists = await _context.Products.AnyAsync(p => p.ID_Product == detail.ProductId);
+            if (!productExists)
+            {
+                return NotFound($"Product with ID {detail.ProductId} not found.");
+            }
+        }
+
         // Create a new Order object
         Guid id_o = Guid.NewGuid();
         var order = new Order
