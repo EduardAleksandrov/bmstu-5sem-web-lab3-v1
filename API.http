@@ -21,7 +21,7 @@ Content-Type: application/json
     ]
 }
 ### Get Order
-Get {{API_HostAddress}}/api/Orders/7ae56191-c63c-4d0c-bf12-3ca0685ec974 HTTP/1.1
+Get {{API_HostAddress}}/api/Orders/37e33bbb-96e4-435a-835a-3e076754907d HTTP/1.1
 Accept: application/json
 Content-Type: application/json
 
@@ -31,19 +31,19 @@ Accept: application/json
 Content-Type: application/json
 
 ### Update an Order
-PUT {{API_HostAddress}}/api/Orders/3238d9ce-c058-46ba-8f0b-a6e718531990 HTTP/1.1
+PUT {{API_HostAddress}}/api/Orders/37e33bbb-96e4-435a-835a-3e076754907d HTTP/1.1
 Accept: application/json
 Content-Type: application/json
 
 {
-    "ID_Order": "3238d9ce-c058-46ba-8f0b-a6e718531990",
-    "CustomerID": "4876cb7e-bd37-4b2c-95cf-f102aaa028fa",
+    "ID_Order": "37e33bbb-96e4-435a-835a-3e076754907d",
+    "CustomerID": "3d6dc92a-6a71-48d0-a09e-811f1a7133de",
     "TotalAmount": 100.00,
     "Status": "Shipped"
 }
 
 ### Delete an Order
-DELETE {{API_HostAddress}}/api/orders/00959b56-1b6c-4224-b463-2bb8283f25ce HTTP/1.1
+DELETE {{API_HostAddress}}/api/orders/37e33bbb-96e4-435a-835a-3e076754907d HTTP/1.1
 
 ### Options for Orders
 OPTIONS {{API_HostAddress}}/api/orders HTTP/1.1
